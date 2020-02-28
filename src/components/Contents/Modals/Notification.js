@@ -13,7 +13,7 @@ const Notification = (props) =>{
             {...props}
         >
             <Modal.Header>
-                <Modal.Title>
+                <Modal.Title className='text-danger'>
                     {props.notification.title}
                 </Modal.Title>
             </Modal.Header>
