@@ -3,8 +3,12 @@ import {Card, Button} from 'react-bootstrap'
 import { useState } from 'react'
 
 
-import ProductListModal from './Modals/ProductListModal'
 
+import ProductListModal from './Modals/ProductListModal'
+const dotenv = require('dotenv')
+
+dotenv.config()
+console.log(process.env.DB_HOST)
 const Content = () =>{
 
     const style={

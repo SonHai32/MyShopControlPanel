@@ -124,8 +124,7 @@ const ProductListModal = props => {
       productId &&
       productPrice &&
       productDiscount &&
-      images.length >= 4 && 
-      !notification
+      images.length >= 4  
     ) {
       let imageFiles = [];
       images.forEach(image => {
@@ -150,18 +149,34 @@ const ProductListModal = props => {
           }
         })
         .then(result => {
-          console.log(result);
+          if(result.data.success){
+            setNotification({title: 'Thông Báo', message: 'Thêm Đơn Hàng Thành Công ✨'});
+            setNotificationModal(true);
+            
+            clearFormData()
+          }else{
+            setNotification({title:'ERROR', message: result.data.message})
+            setNotificationModal(true)
+          }
         })
         .catch(err => {
-          console.log(err);
+          setNotification({title:'ERROR', message: err.message})
+          setNotificationModal(true)
         });
     } else {
-      if(!notification){
-        setNotification({ title:'ERROR',message: "Bạn Chưa Nhập Đầy Đủ Thông Tin Sản Phẩm" });
-      }
+      setNotification({ title:'ERROR',message: "Bạn Chưa Nhập Đầy Đủ Thông Tin Sản Phẩm" });
       setNotificationModal(true)
     }
   };
+
+  const clearFormData = () =>{
+    setCollectionId('');
+    setProductId('');
+    setProductName('');
+    setProductDiscount('');
+    setProductPrice('');
+    setImages([]);
+  }
 
   return (
     <React.Fragment>
@@ -182,6 +197,7 @@ const ProductListModal = props => {
                 type="text"
                 name="name"
                 onChange={handleInputChange}
+                value={productName}
               />
             </Form.Group>
             <Form.Group controlId="formBasicProductId">
@@ -190,6 +206,7 @@ const ProductListModal = props => {
                 type="text"
                 name="productId"
                 onChange={handleInputChange}
+                value={productId}
               />
             </Form.Group>
             <Form.Group controlId="formBasicCollectionId">
@@ -198,6 +215,7 @@ const ProductListModal = props => {
                 type="text"
                 name="collectionId"
                 onChange={handleInputChange}
+                value={collectionId}
               />
             </Form.Group>
             <Form.Group controlId="formBasicProductPrice">
@@ -206,6 +224,7 @@ const ProductListModal = props => {
                 type="number"
                 name="price"
                 onChange={handleInputChange}
+                value={productPrice}
               />
             </Form.Group>
             <Form.Group controlId="formBasicProductDiscount">
@@ -214,6 +233,7 @@ const ProductListModal = props => {
                 type="number"
                 name="discount"
                 onChange={handleInputChange}
+                value={productDiscount}
               />
             </Form.Group>
             <Form.Group controlId="formBasicImage">
@@ -245,7 +265,7 @@ const ProductListModal = props => {
           </Modal.Footer>
         </Modal.Body>
       </Modal>
-      {notification ? <Notification show={notificationModal} onHide={() => setNotificationModal(false)} notification={notification} />  : ''}
+      {notification ? <Notification show={notificationModal} onHide={() => setNotificationModal(false)} notification={notification}  />   : ''}
     </React.Fragment>
   );
 };
