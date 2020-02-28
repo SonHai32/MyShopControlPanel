@@ -3,7 +3,10 @@ import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button,Form,Spinner} from 'react-bootstrap';
+
 import {UserContext} from '../context/UserContext'
+import Notification from '../Contents/Modals/Notification'
+
 
 import dotenv from 'dotenv'
 
@@ -15,6 +18,9 @@ const Login = () =>{
     const [password, setPassword] = useState('');
     const [loading, setLoading]   = useState(false);  
     const [user, setUser]         = useContext(UserContext)
+    const [notification, setNotification] = useState();
+    const [notificationModal, setNotificationModal] = useState(false);
+
     let history = useHistory()
 
     useEffect(() =>{
@@ -51,14 +57,17 @@ const Login = () =>{
                             }
                         })
                         .catch(err =>{
-                            console.log(err)
+                            setNotification({title: 'ERROR', message: err.message})
+                            setNotificationModal(true)
+
                         })
                 }
                 setLoading(false)
             })
             .catch(err =>{
-                console.log(err)
                 setLoading(false)
+                setNotification({title: 'ERROR', message: 'Something Went Wrong'})
+                setNotificationModal(true)
             })
     }
 
@@ -79,7 +88,10 @@ const Login = () =>{
                         <Spinner animation='border' size='sm' role='status' aria-hidden='true' />
                         : 'LOGIN'}
                 </Button>
-                </Form> 
+                </Form>
+                {notification ? 
+                    <Notification show={notificationModal} notification={notification} onHide={() => setNotificationModal(false)} />
+                : ''}
         </div>
     )
 }
