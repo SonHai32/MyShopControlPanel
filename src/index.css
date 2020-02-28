@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.absolute-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)
+}
+
+.login-form{
+    width: 500px;
+    height: 600px
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column
+}
+
+.flex-align-center{
+    align-items:center;
+}
+
+.justtify-center{
+    justify-content:center
+}
+
+.fliud{
+    width: 100%
+}

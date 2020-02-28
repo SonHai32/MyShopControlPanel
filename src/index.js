@@ -1,12 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {UserContext} from './components/context/UserContext'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import Login from './components/auth/Login'
+
+const Index = () =>{
+    const [user, setUser] = useState(null)
+    return(
+        <UserContext.Provider value={[user, setUser]}>
+            <Router>
+                <Switch>
+                    <Route exact path='/' component={App} />
+                    <Route path='/Login' component={Login} />
+                </Switch>
+            </Router>
+        </UserContext.Provider>
+        
+    )
+}
+
+
+ReactDOM.render(<Index />, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
