@@ -13,7 +13,7 @@ import {
 
 import Notification from "./Notification";
 
-const ProductListModal = props => {
+const AddProductModal = props => {
   const [images, setImages] = useState([]);
   const [productName, setProductName] = useState("");
   const [productId, setProductId] = useState("");
@@ -73,7 +73,8 @@ const ProductListModal = props => {
   };
 
   const isImage = file => {
-    return file.type === "image/png" || file.type === "image/jpge";
+    console.log(file.type)
+    return file.type === "image/png" || file.type === "image/jpeg";
   };
 
   const imageSizeLimit = file => {
@@ -117,7 +118,7 @@ const ProductListModal = props => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     if (
       productName &&
@@ -138,9 +139,11 @@ const ProductListModal = props => {
       formData.append("price", productPrice);
       formData.append("discount", productDiscount);
 
-      imageFiles.forEach((file, index) => {
+      await imageFiles.forEach((file, index) => {
         formData.append(`file${index}`, file);
       });
+
+      console.log(formData)
 
       axios
         .post("http://localhost:1337/api/Products", formData, {
@@ -270,4 +273,4 @@ const ProductListModal = props => {
   );
 };
 
-export default ProductListModal;
+export default AddProductModal;

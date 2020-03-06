@@ -4,11 +4,10 @@ import { useState } from 'react'
 
 
 
-import ProductListModal from './Modals/ProductListModal'
-const dotenv = require('dotenv')
+import AddProductModal from '../Modals/AddProductModal'
+import productListModal from '../Modals/ProductLstModal'
+import ProductListModal from '../Modals/ProductLstModal'
 
-dotenv.config()
-console.log(process.env.DB_HOST)
 const Content = () =>{
 
     const style={
@@ -32,7 +31,7 @@ const Content = () =>{
               </Card>
               <Card>
                 <Card.Header>
-                  <Button block variant='info'>Danh Sách Sản Phẩm</Button>
+                  <Button block variant='info' onClick={() => setProductListModal(true)}>Danh Sách Sản Phẩm</Button>
                 </Card.Header>
               </Card>
               <Card>
@@ -40,7 +39,14 @@ const Content = () =>{
                   <Button block variant='info'>OK</Button>
                 </Card.Header>
               </Card>
-              <ProductListModal show={addProductModal} onHide={() => setAddProductModal(false)} />
+              {addProductModal ?
+
+                <AddProductModal show={addProductModal} onHide={() => setAddProductModal(false)} />
+             : ''}
+             {productListModal ? 
+             
+                <ProductListModal show={productListModal} onHide={() => setProductListModal(false)} />
+             : ''}
             </div>
         </div>
     )

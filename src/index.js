@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {UserContext} from './components/context/UserContext'
 
 import Login from './components/auth/Login'
+import Products from './components/products/products.component'
 
 const Index = () =>{
     const [user, setUser] = useState(null)
@@ -15,6 +16,7 @@ const Index = () =>{
                 <Switch>
                     <Route exact path='/' component={App} />
                     <Route path='/Login' component={Login} />
+                    <Route path='/Products' component={Products} />
                 </Switch>
             </Router>
         </UserContext.Provider>

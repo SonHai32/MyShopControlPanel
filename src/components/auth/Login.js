@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Spinner } from "react-bootstrap";
 
 import { UserContext } from "../context/UserContext";
-import Notification from "../Contents/Modals/Notification";
+import Notification from "../Modals/Notification";
 
 import dotenv from "dotenv";
 
