@@ -74,7 +74,7 @@ const AddProductModal = props => {
 
   const isImage = file => {
     console.log(file.type)
-    return file.type === "image/png" || file.type === "image/jpeg";
+    return file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/webp";
   };
 
   const imageSizeLimit = file => {

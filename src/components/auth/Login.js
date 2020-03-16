@@ -54,8 +54,12 @@ const Login = () => {
         .post(`http://localhost:1337/auth/login`, {
           username: username,
           password: password
-        })
-        .then(res => {
+        },{headers:{
+          'Access-Control-Allow-Origin' : 'http://localhost:1337',
+          'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept',
+          'Access-Control-Methods': 'POST'
+        }})
+        .then(res =>   {
           console.log(res);
           if (res.data.success) {
             const token = res.data.token;
@@ -83,6 +87,7 @@ const Login = () => {
         })
         .catch(err => {
           setLoading(false);
+          console.log(err)
           setNotification({ title: "ERROR", message: "Something Went Wrong" });
           setNotificationModal(true);
         });
